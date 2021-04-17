@@ -23,5 +23,4 @@ public:
     string getTitle() const {return title;}
     string getVariety() const {return variety;}
     string getWinery() const {return winery;}
-    
 };
