@@ -15,9 +15,9 @@ void bubbleSort(vector<Wine>& vect)
     int swapped = 0;
     for (int j = 0; j < vect.size() - i - 1; ++j) 
     {
-      if (vect[j] > vect[j + 1]) 
+      if (vect[j].getPrice() > vect[j + 1].getPrice()) 
       {
-        int temp = vect[j].getPoints();
+        Wine temp = vect[j];
         vect[j] = vect[j + 1];
         vect[j + 1] = temp;
         swapped = 1;
@@ -35,8 +35,8 @@ void merge(vector<Wine>& vect, int left, int mid, int right)
 {
     int n1 = mid - left + 1;
     int n2 = right - mid;
-    vector<int> X;
-    vector<int> Y;
+    vector<Wine> X;
+    vector<Wine> Y;
 
     for (int i = 0; i < n1; i++)
     {
@@ -54,7 +54,7 @@ void merge(vector<Wine>& vect, int left, int mid, int right)
   k = left;
   while (i < n1 && j < n2) 
   {
-    if (X[i] <= Y[j]) 
+    if (X[i].getPrice() <= Y[j].getPrice()) 
     {
       vect[k] = X[i];
       i++;
@@ -99,23 +99,23 @@ void mergeSort(vector<Wine>& vect, int left, int right)
 }
 
 //QUICK SORT, psuedocode cited from slides module 6
-void swap(int *a, int *b)
+void swap(Wine *a, Wine *b)
 {
-    int t = *a;
+    Wine t = *a;
     *a = *b;
     *b = t;
 }
 
 int partition(vector<Wine>& vect, int low, int high) 
 {
-  int pivot = vect[low];
+  int pivot = vect[low].getPrice();
   int up=low, down=high;
   
   while(up<down)
   {
       for (int j = up; j < high; j++)
       {
-        if(vect[up] > pivot)
+        if(vect[up].getPrice() > pivot)
         {
             break;
         }
@@ -123,7 +123,7 @@ int partition(vector<Wine>& vect, int low, int high)
       }
       for (int j = high; j > low; j--)
       {
-        if(vect[down] < pivot)
+        if(vect[down].getPrice() < pivot)
         {
             break;
         }
