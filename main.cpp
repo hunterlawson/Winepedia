@@ -36,40 +36,40 @@ int main() {
     cout<< "5. Search by winery" << endl;
     
     string colNumStr;
-    cout<< "Menu Choice: ";
+    cout<< "\nMenu Choice: ";
     getline(cin,colNumStr);
     int colNum = stoi(colNumStr);
     
     string searchItem;
     
    if (colNum == 1)
-       cout<< "Enter country: ";
+       cout<< "\nEnter country: ";
     else if (colNum == 2)
-        cout<< "Enter province: ";
+        cout<< "\nEnter province: ";
     else if (colNum == 3)
-        cout<< "Enter title: ";
+        cout<< "\nEnter title: ";
     else if (colNum == 4)
-        cout<< "Enter variety: ";
+        cout<< "\nEnter variety: ";
     else if (colNum == 5)
-        cout<< "Enter winery: ";   
+        cout<< "\nEnter winery: ";   
   
     getline(cin,searchItem);  
     
     //Search by data structure
     string algoStr;
     
-    cout<< "Sorting Algorithm Options: " << endl;
+    cout<< "\nSorting Algorithm Options: " << endl;
     cout<< "1. Bubble Sort"<< endl;
     cout<< "2. Merge Sort" << endl;
     cout<< "3. Quick Sort" << endl;
-    cout<< "Enter menu option number: ";
+    cout<< "\nEnter menu option number: ";
     getline(cin,algoStr);
     int algo = stoi(algoStr);
       
-    cout<< "Search by: "<< endl;
+    cout<< "\nSearch by: "<< endl;
     cout<< "1. Points"<< endl;
     cout<< "2. Price" << endl;
-    cout<< "Enter menu option number: ";
+    cout<< "\nEnter menu option number: ";
     string selectionStr;
     getline(cin,selectionStr);
     int selection = stoi(selectionStr);
