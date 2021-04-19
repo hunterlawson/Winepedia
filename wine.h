@@ -1,11 +1,13 @@
 #include <string>
 #include <iostream>
+#include <iomanip>
 using namespace std;
 class Wine {
     string country, description, province, winery, variety, title;
-    unsigned int points, price;
+    unsigned int num, points, price;
 public:
-    Wine(string country, string description, unsigned int points, unsigned int price, string province, string title, string variety, string winery) {
+    Wine(unsigned int num, string country, string description, unsigned int points, unsigned int price, string province, string title, string variety, string winery) {
+        this->num = num;
         this->country = country;
         this->description = description;
         this->points = points;
@@ -15,6 +17,7 @@ public:
         this->variety = variety;
         this->winery = winery;
     }
+    unsigned int getNum() const {return num;}
     string getCountry() const {return country;}
     string getDescription() const {return description;}
     unsigned int getPoints() const {return points;}
@@ -23,4 +26,16 @@ public:
     string getTitle() const {return title;}
     string getVariety() const {return variety;}
     string getWinery() const {return winery;}
+
+    // Display the wine in the console
+    void display() {
+        cout << num << ": " << title << endl;
+        cout << "Country: " << country << endl;
+        cout << "Description: " << description << endl;
+        cout << "Points: " << points << endl;
+        cout << "Price: " << price << endl;
+        cout << "Province: " << province << endl;
+        cout << "Variety: " << variety << endl;
+        cout << "Winery: " << winery << endl << endl;
+    }
 };
