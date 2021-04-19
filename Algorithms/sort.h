@@ -5,7 +5,6 @@
 using namespace std;
 
 //3 sorting algorithms: bubble sort = O(N^2), merge sort = O(NlogN), quick sort O(NlogN)
-//2 search algorithms: binary search = O(logN), linear search = O(N)
 //Compare algorithm time complexities to complete similar tasks
 
 //BUBBLE SORT, psuedocode cited from slides module 6
@@ -18,7 +17,7 @@ void bubbleSort(vector<Wine>& vect)
     {
       if (vect[j] > vect[j + 1]) 
       {
-        int temp = vect[j];
+        int temp = vect[j].getPoints();
         vect[j] = vect[j + 1];
         vect[j + 1] = temp;
         swapped = 1;
@@ -149,38 +148,12 @@ void quickSort(vector<Wine>& vect, int low, int high)
   }
 }
 
-//BINARY SEARCH (returning index)
-int binarySearch(vector<Wine>& vect, string target, int low, int high) 
-{
-  while (low <= high) 
-  {
-    int mid = low + (high - low) / 2;
-
-    if (vect[mid] == target)
-    {
-      return mid;
-    }
-
-    if (vect[mid] < target)
-    {
-      low = mid + 1;
-    }
-
-    else
-    {
-      high = mid - 1;
-    }
-  }
-  cout << "Wine not found." << endl;
-  return -1;
-}
-
 //LINEAR SEARCH (returning index)
 int search(vector<Wine>& vect, string target) 
 {
   for (int i = 0; i < vect.size(); i++)
   {
-    if (vect[i] == target)
+    if (vect[i].getTitle() == target)
     {
       return i;
     }
