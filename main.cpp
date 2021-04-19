@@ -88,7 +88,7 @@ int main() {
          if (selection == 1) //points
             shellSortPrice(searchResults);   
         else if (selection == 2)   //price        
-            shellSortPrice(searchResults);
+            shellSortPoints(searchResults);
     }
     else if (algo == 3) { //quick
           if (selection == 1) //points
