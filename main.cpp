@@ -60,7 +60,7 @@ int main() {
     
     cout<< "\nSorting Algorithm Options: " << endl;
     cout<< "1. Bubble Sort"<< endl;
-    cout<< "2. Merge Sort" << endl;
+    cout<< "2. Heap Sort" << endl;
     cout<< "3. Quick Sort" << endl;
     cout<< "\nEnter menu option number: ";
     getline(cin,algoStr);
@@ -86,9 +86,9 @@ int main() {
     }
     else if (algo == 2) { //merge
          if (selection == 1) //points
-            shellSortPrice(searchResults);   
+            heapSortPoints(searchResults, searchResults.size());   
         else if (selection == 2)   //price        
-            shellSortPoints(searchResults);
+            heapSortPrice(searchResults, searchResults.size());
     }
     else if (algo == 3) { //quick
           if (selection == 1) //points

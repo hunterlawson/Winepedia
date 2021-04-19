@@ -3,9 +3,10 @@
 #include <string>
 #include "../Data/wine.h"
 #include <chrono>
+#include <algorithm>
 using namespace std;
 
-//3 sorting algorithms: bubble sort = O(N^2), selection = O(N^2), quick sort O(NlogN)
+//3 sorting algorithms: bubble sort = O(N^2), heap = O(NlogN), quick sort O(NlogN)
 //Compare algorithm time complexities to complete similar tasks
 //Included chrono to calculate the time for each sort
 
@@ -54,45 +55,74 @@ void bubbleSortPoint(vector<Wine>& vect)
   }
 }
 
-void shellSortPrice(vector<Wine>& vect)
+//Based off implementation on software testing (website)
+//Also used iter_swap for vector to swap vectors
+void heapifyPrice(vector<Wine>& vect, int n, int root)
 {
-  for(int i = vect.size(); i > 0; i /= 2)
-  {
-    for(int k = i; k < vect.size(); k += 1)
-    {
-      Wine temp = vect[k];
+  int largest = root;
+  int l = 2*root + 1;
+  int r = 2*root + 2;
 
-      int j;
-      for(int j = k; j >= i && vect[j - i].getPrice() > temp.getPrice(); j -= k)
-      {
-        vect[j] = vect[j - i];
-      }
-      vect[j] = temp;
-    }
+  if (l < n && vect[l].getPrice() > vect[largest].getPrice())
+    largest = l;
+
+  if (r < n && vect[r].getPrice() > vect[largest].getPrice())
+    largest = r;
+  
+  if (largest != root)
+  {
+    iter_swap(vect.begin() + root, vect.begin() + largest);
+    heapifyPrice(vect, n, largest);
   }
 }
-
-void shellSortPoints(vector<Wine>& vect)
+  
+void heapSortPrice(vector<Wine>& vect, int n)
 {
-  for(int i = vect.size(); i > 0; i /= 2)
-  {
-    for(int k = i; k < vect.size(); k += 1)
-    {
-      Wine temp = vect[k];
+   for (int i = n / 2 - 1; i >= 0; i--)
+   heapifyPrice(vect, n, i);
+  
+   for (int i=n-1; i>=0; i--)
+   {
+      iter_swap(vect.begin(), vect.begin() + i);
+      heapifyPrice(vect, i, 0);
+   }
+}
 
-      int j;
-      for(int j = k; j >= i && vect[j - i].getPoints() > temp.getPoints(); j -= k)
-      {
-        vect[j] = vect[j - i];
-      }
-      vect[j] = temp;
-    }
+void heapifyPoints(vector<Wine>& vect, int n, int root)
+{
+  int largest = root;
+  int l = 2*root + 1;
+  int r = 2*root + 2;
+
+  if (l < n && vect[l].getPoints() > vect[largest].getPoints())
+    largest = l;
+
+  if (r < n && vect[r].getPoints() > vect[largest].getPoints())
+    largest = r;
+  
+  if (largest != root)
+  {
+    iter_swap(vect.begin() + root, vect.begin() + largest);
+    heapifyPoints(vect, n, largest);
   }
 }
+  
+void heapSortPoints(vector<Wine>& vect, int n)
+{
+   for (int i = n / 2 - 1; i >= 0; i--)
+   heapifyPoints(vect, n, i);
+  
+   for (int i=n-1; i>=0; i--)
+   {
+      iter_swap(vect.begin(), vect.begin() + i);
+      heapifyPoints(vect, i, 0);
+   }
+}
+
 
 
 //QUICK SORT, psuedocode cited from slides module 6
-void swap(Wine *a, Wine *b)
+void swapQ(Wine *a, Wine *b)
 {
     Wine t = *a;
     *a = *b;
@@ -124,10 +154,10 @@ int partitionPrice(vector<Wine>& vect, int low, int high)
       }
       if(up<down)
       {
-        swap(&vect[up], &vect[down]);
+        swapQ(&vect[up], &vect[down]);
       }
   }
-  swap(&vect[low], &vect[down]);
+  swapQ(&vect[low], &vect[down]);
   return down;
 }
 
@@ -166,10 +196,10 @@ int partitionPoints(vector<Wine>& vect, int low, int high)
       }
       if(up<down)
       {
-        swap(&vect[up], &vect[down]);
+        swapQ(&vect[up], &vect[down]);
       }
   }
-  swap(&vect[low], &vect[down]);
+  swapQ(&vect[low], &vect[down]);
   return down;
 }
 
