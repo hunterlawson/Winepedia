@@ -64,18 +64,33 @@ int main() {
     cout<< "Enter menu option number: ";    
     getline(cin,algo);
       
+    cout<< "Search by: "<< endl;
+    cout<< "1. Points"<< endl;
+    cout<< "2. Price" << endl;
+    cout<< "Enter menu option number: ";
+    int selection;
+    getline(cin,selection);
     
     selectData(dataDir, colNum, searchItem, &searchResults);
     
      //Call sorting functions
-    if (algo == 1) { //bubble
-        bubbleSort(searchResults);
+    if (algo == 1)  { //bubble
+        if (selection == 1) //points
+            bubbleSortPoint(searchResults);            
+        else if (selection == 2)   //price          
+            bubbleSortPrice(searchResults);
     }
     else if (algo == 2) { //merge
-        mergeSort(searchResults,0,searchResults.size()-1);
+         if (selection == 1) //points
+            mergeSortPoints(searchResults,0,searchResults.size()-1);   
+        else if (selection == 2)   //price        
+            mergeSortPrice(searchResults,0,searchResults.size()-1);
     }
     else if (algo == 3) { //quick
-        quickSort(searchResults,0,searchResults.size()-1);
+          if (selection == 1) //points
+            quickSortPoints(searchResults,0,searchResults.size()-1);
+        else if (selection == 2)   //price      
+            quickSortPrice(searchResults,0,searchResults.size()-1);
     }
     
     for(Wine w : searchResults) {
