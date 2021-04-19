@@ -12,6 +12,7 @@
 #include <vector>
 #include "Data/sqlite3.h"
 #include "Data/wine.h"
+#include "Algorithms/sort.h"
 using namespace std;
 
 // Selects Wines from the database where attribute # 'columnNum' matches 'term'

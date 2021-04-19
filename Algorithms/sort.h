@@ -1,14 +1,15 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include "Data/wine.h"
 using namespace std;
 
 //3 sorting algorithms: bubble sort = O(N^2), merge sort = O(NlogN), quick sort O(NlogN)
 //2 search algorithms: binary search = O(logN), linear search = O(N)
-//Compare algorithm time complexities to compare different tasks
+//Compare algorithm time complexities to complete similar tasks
 
 //BUBBLE SORT, psuedocode cited from slides module 6
-void bubbleSort(vector<int>& vect) 
+void bubbleSort(vector<Wine>& vect) 
 {
   for (int i = 0; i < vect.size() - 1; i++) 
   {
@@ -31,7 +32,7 @@ void bubbleSort(vector<int>& vect)
 }
 
 //MERGE SORT, psuedocode cited from slides module 6
-void merge(vector<int>& vect, int left, int mid, int right) 
+void merge(vector<Wine>& vect, int left, int mid, int right) 
 {
     int n1 = mid - left + 1;
     int n2 = right - mid;
@@ -83,7 +84,7 @@ void merge(vector<int>& vect, int left, int mid, int right)
 }
 
 
-void mergeSort(vector<int>& vect, int left, int right) 
+void mergeSort(vector<Wine>& vect, int left, int right) 
 {
   if (left < right) 
   {
@@ -106,7 +107,7 @@ void swap(int *a, int *b)
     *b = t;
 }
 
-int partition(vector<int>& vect, int low, int high) 
+int partition(vector<Wine>& vect, int low, int high) 
 {
   int pivot = vect[low];
   int up=low, down=high;
@@ -138,7 +139,7 @@ int partition(vector<int>& vect, int low, int high)
   return down;
 }
 
-void quickSort(vector<int>& vect, int low, int high) 
+void quickSort(vector<Wine>& vect, int low, int high) 
 {
   if (low < high) 
   {
@@ -149,7 +150,7 @@ void quickSort(vector<int>& vect, int low, int high)
 }
 
 //BINARY SEARCH (returning index)
-int binarySearch(vector<string>& vect, string target, int low, int high) 
+int binarySearch(vector<Wine>& vect, string target, int low, int high) 
 {
   while (low <= high) 
   {
@@ -175,7 +176,7 @@ int binarySearch(vector<string>& vect, string target, int low, int high)
 }
 
 //LINEAR SEARCH (returning index)
-int search(vector<string>& vect, string target) 
+int search(vector<Wine>& vect, string target) 
 {
   for (int i = 0; i < vect.size(); i++)
   {
