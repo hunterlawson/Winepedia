@@ -147,19 +147,3 @@ void quickSort(vector<Wine>& vect, int low, int high)
     quickSort(vect, pivot + 1, high);
   }
 }
-
-//LINEAR SEARCH (returning index)
-int search(vector<Wine>& vect, string target) 
-{
-  for (int i = 0; i < vect.size(); i++)
-  {
-    if (vect[i].getTitle() == target)
-    {
-      return i;
-    }
-  }
-  cout << "Wine not found." << endl;
-  return -1;
-}
-
-//Add comparator for price (sort), name (search), region (search), country (search), and point value (sort)
