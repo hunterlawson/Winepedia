@@ -25,7 +25,36 @@ int main() {
     const char* dataDir = "Data/wineData.db";
     vector<Wine> searchResults;
     searchResults.clear();
-    selectData(dataDir, 1, "South Africa", &searchResults);
+    
+   
+    cout<< "--------Winepedia--------" << endl;
+    cout<< "1. Search by country" << endl;
+    cout<< "2. Search by province" << endl;
+    cout<< "3. Search by title" << endl;
+    cout<< "4. Search by variety" << endl;
+    cout<< "5. Search by winery" << endl;
+    
+    int colNum;
+    cout<< "Menu Choice: ";
+    getline(cin,colNum);
+    
+    string searchItem;
+    
+   if (colNum == 1)
+       cout<< "Enter country: ";
+    else if (colNum == 2)
+        cout<< "Enter province: ";
+    else if (colNum == 3)
+        cout<< "Enter title: ";
+    else if (colNum == 4)
+        cout<< "Enter variety: ";
+    else if (colNum == 5)
+        cout<< "Enter winery: ";
+    
+    getline(cin,searchItem);        
+      
+   
+    selectData(dataDir, colNum, searchItem, &searchResults);
     for(Wine w : searchResults) {
         w.display();
     }
