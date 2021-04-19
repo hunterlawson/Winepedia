@@ -2,14 +2,17 @@
 #include <vector>
 #include <string>
 #include "Data/wine.h"
+#include <chrono>
 using namespace std;
 
 //3 sorting algorithms: bubble sort = O(N^2), merge sort = O(NlogN), quick sort O(NlogN)
 //Compare algorithm time complexities to complete similar tasks
+//Included chrono to calculate the time for each sort
 
 //BUBBLE SORT, psuedocode cited from slides module 6
 void bubbleSortPrice(vector<Wine>& vect) 
 {
+  auto start = chrono::steady_clock::now();
   for (int i = 0; i < vect.size() - 1; i++) 
   {
     int swapped = 0;
@@ -28,10 +31,14 @@ void bubbleSortPrice(vector<Wine>& vect)
         break;
     }
   }
+  auto end = chrono::steady_clock::now();
+  auto diff = end - start;
+  cout << chrono::duration <double, milli> (diff).count() << " ms" << endl;
 }
 
 void bubbleSortPoint(vector<Wine>& vect) 
 {
+  auto start = chrono::steady_clock::now();
   for (int i = 0; i < vect.size() - 1; i++) 
   {
     int swapped = 0;
@@ -50,8 +57,10 @@ void bubbleSortPoint(vector<Wine>& vect)
         break;
     }
   }
+  auto end = chrono::steady_clock::now();
+  auto diff = end - start;
+  cout << chrono::duration <double, milli> (diff).count() << " ms" << endl;
 }
-
 
 
 
@@ -110,6 +119,7 @@ void mergePrice(vector<Wine>& vect, int left, int mid, int right)
 
 void mergeSortPrice(vector<Wine>& vect, int left, int right) 
 {
+  auto start = chrono::steady_clock::now();
   if (left < right) 
   {
     // m is the point where the array is divided into two subarrays
@@ -121,6 +131,9 @@ void mergeSortPrice(vector<Wine>& vect, int left, int right)
     // Merge the sorted subarrays
     mergePrice(vect, left, mid, right);
   }
+  auto end = chrono::steady_clock::now();
+  auto diff = end - start;
+  cout << chrono::duration <double, milli> (diff).count() << " ms" << endl;
 }
 
 void mergePoints(vector<Wine>& vect, int left, int mid, int right) 
@@ -176,6 +189,7 @@ void mergePoints(vector<Wine>& vect, int left, int mid, int right)
 
 void mergeSortPoints(vector<Wine>& vect, int left, int right) 
 {
+  auto start = chrono::steady_clock::now();
   if (left < right) 
   {
     int mid = left + (right - left) / 2;
@@ -186,8 +200,10 @@ void mergeSortPoints(vector<Wine>& vect, int left, int right)
     // Merge the sorted subarrays
     mergePoints(vect, left, mid, right);
   }
+  auto end = chrono::steady_clock::now();
+  auto diff = end - start;
+  cout << chrono::duration <double, milli> (diff).count() << " ms" << endl;
 }
-
 
 
 
@@ -234,12 +250,16 @@ int partitionPrice(vector<Wine>& vect, int low, int high)
 
 void quickSortPrice(vector<Wine>& vect, int low, int high) 
 {
+  auto start = chrono::steady_clock::now();
   if (low < high) 
   {
     int pivot = partitionPrice(vect, low, high);
     quickSortPrice(vect, low, pivot - 1);
     quickSortPrice(vect, pivot + 1, high);
   }
+  auto end = chrono::steady_clock::now();
+  auto diff = end - start;
+  cout << chrono::duration <double, milli> (diff).count() << " ms" << endl;
 }
 
 int partitionPoints(vector<Wine>& vect, int low, int high) 
@@ -276,10 +296,14 @@ int partitionPoints(vector<Wine>& vect, int low, int high)
 
 void quickSortPoints(vector<Wine>& vect, int low, int high) 
 {
+  auto start = chrono::steady_clock::now();
   if (low < high) 
   {
     int pivot = partitionPoints(vect, low, high);
     quickSortPoints(vect, low, pivot - 1);
     quickSortPoints(vect, pivot + 1, high);
   }
+  auto end = chrono::steady_clock::now();
+  auto diff = end - start;
+  cout << chrono::duration <double, milli> (diff).count() << " ms" << endl;
 }
