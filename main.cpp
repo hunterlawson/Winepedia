@@ -5,13 +5,13 @@
 
     Winepedia - wine search engine
     To compile: 
-        g++ main.cpp sqlite3.o -o Winepedia.exe
+        g++ main.cpp Data/sqlite3.o -o Winepedia.exe
 */
 
 #include <string>
 #include <vector>
-#include "sqlite3.h"
-#include "wine.h"
+#include "Data/sqlite3.h"
+#include "Data/wine.h"
 using namespace std;
 
 // Selects Wines from the database where attribute # 'columnNum' matches 'term'
