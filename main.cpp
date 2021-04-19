@@ -35,9 +35,10 @@ int main() {
     cout<< "4. Search by variety" << endl;
     cout<< "5. Search by winery" << endl;
     
-    int colNum;
+    string colNumStr;
     cout<< "Menu Choice: ";
-    getline(cin,colNum);
+    getline(cin,colNumStr);
+    int colNum = stoi(colNumStr);
     
     string searchItem;
     
@@ -55,21 +56,23 @@ int main() {
     getline(cin,searchItem);  
     
     //Search by data structure
-    int algo;
+    string algoStr;
     
     cout<< "Sorting Algorithm Options: " << endl;
     cout<< "1. Bubble Sort"<< endl;
     cout<< "2. Merge Sort" << endl;
     cout<< "3. Quick Sort" << endl;
-    cout<< "Enter menu option number: ";    
-    getline(cin,algo);
+    cout<< "Enter menu option number: ";
+    getline(cin,algoStr);
+    int algo = stoi(algoStr);
       
     cout<< "Search by: "<< endl;
     cout<< "1. Points"<< endl;
     cout<< "2. Price" << endl;
     cout<< "Enter menu option number: ";
-    int selection;
-    getline(cin,selection);
+    string selectionStr;
+    getline(cin,selectionStr);
+    int selection = stoi(selectionStr);
     
     selectData(dataDir, colNum, searchItem, &searchResults);
     
