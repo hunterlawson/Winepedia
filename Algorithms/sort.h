@@ -60,7 +60,6 @@ void bubbleSortPoint(vector<Wine>& vect)
 //MERGE SORT, psuedocode cited from slides module 6
 void mergePrice(vector<Wine>& vect, int left, int mid, int right) 
 {
-
     vector<Wine> X(mid - left + 1);
     vector<Wine> Y(right - mid);
 
@@ -78,7 +77,7 @@ void mergePrice(vector<Wine>& vect, int left, int mid, int right)
   i = 0;
   j = 0;
   k = left;
-  while (i < X.size() && j < X.size()) 
+  while (i < X.size() && j < Y.size()) 
   {
     if (X[i].getPrice() <= Y[j].getPrice()) 
     {
