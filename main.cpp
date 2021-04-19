@@ -77,6 +77,7 @@ int main() {
     selectData(dataDir, colNum, searchItem, &searchResults);
     
      //Call sorting functions
+    auto start = chrono::steady_clock::now();
     if (algo == 1)  { //bubble
         if (selection == 1) //points
             bubbleSortPoint(searchResults);            
@@ -95,6 +96,9 @@ int main() {
         else if (selection == 2)   //price      
             quickSortPrice(searchResults,0,searchResults.size()-1);
     }
+    auto end = chrono::steady_clock::now();
+    auto diff = end - start;
+    cout << chrono::duration <double, milli> (diff).count() << " ms" << endl;
     
     for(Wine w : searchResults) {
         w.display();

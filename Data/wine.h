@@ -1,3 +1,4 @@
+#pragma once
 #include <string>
 #include <iostream>
 #include <iomanip>
@@ -29,7 +30,7 @@ public:
 
     // Display the wine in the console
     void display() {
-        cout << num << ": " << title << endl;
+        cout << title << endl;
         cout << "Country: " << country << endl;
         cout << "Description: " << description << endl;
         cout << "Points: " << points << endl;
