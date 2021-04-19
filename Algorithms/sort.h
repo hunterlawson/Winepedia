@@ -4,6 +4,7 @@
 using namespace std;
 
 //3 sorting algorithms: bubble sort = O(N^2), merge sort = O(NlogN), quick sort O(NlogN)
+//2 search algorithms: binary search = O(logN), linear search = O(N)
 //Compare algorithm time complexities to compare different tasks
 
 //BUBBLE SORT, psuedocode cited from slides module 6
@@ -147,5 +148,44 @@ void quickSort(vector<int>& vect, int low, int high)
   }
 }
 
-//NEED TO WRITE SORT FUNCTION BASED OFF STRINGS
-//i.e. country, name, etc.
+//BINARY SEARCH (returning index)
+int binarySearch(vector<string>& vect, string target, int low, int high) 
+{
+  while (low <= high) 
+  {
+    int mid = low + (high - low) / 2;
+
+    if (vect[mid] == target)
+    {
+      return mid;
+    }
+
+    if (vect[mid] < target)
+    {
+      low = mid + 1;
+    }
+
+    else
+    {
+      high = mid - 1;
+    }
+  }
+  cout << "Wine not found." << endl;
+  return -1;
+}
+
+//LINEAR SEARCH (returning index)
+int search(vector<string>& vect, string target) 
+{
+  for (int i = 0; i < vect.size(); i++)
+  {
+    if (vect[i] == target)
+    {
+      return i;
+    }
+  }
+  cout << "Wine not found." << endl;
+  return -1;
+}
+
+//Add comparator for price (sort), name (search), region (search), country (search), and point value (sort)
