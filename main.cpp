@@ -86,9 +86,9 @@ int main() {
     }
     else if (algo == 2) { //merge
          if (selection == 1) //points
-            mergeSortPoints(searchResults,0,searchResults.size()-1);   
+            shellSortPrice(searchResults);   
         else if (selection == 2)   //price        
-            mergeSortPrice(searchResults,0,searchResults.size()-1);
+            shellSortPrice(searchResults);
     }
     else if (algo == 3) { //quick
           if (selection == 1) //points

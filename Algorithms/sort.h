@@ -5,7 +5,7 @@
 #include <chrono>
 using namespace std;
 
-//3 sorting algorithms: bubble sort = O(N^2), merge sort = O(NlogN), quick sort O(NlogN)
+//3 sorting algorithms: bubble sort = O(N^2), selection = O(N^2), quick sort O(NlogN)
 //Compare algorithm time complexities to complete similar tasks
 //Included chrono to calculate the time for each sort
 
@@ -54,138 +54,41 @@ void bubbleSortPoint(vector<Wine>& vect)
   }
 }
 
-
-
-
-//MERGE SORT, psuedocode cited from slides module 6
-void mergePrice(vector<Wine>& vect, int left, int mid, int right) 
+void shellSortPrice(vector<Wine>& vect)
 {
-  int n1 = (mid - left + 1);
-  int n2 = (right - mid);
-    vector<Wine> X;
-    vector<Wine> Y;
-
-    for (int i = 0; i < n1; i++)
-    {
-        X[i] = vect[left + i];
-    }
-    for (int j = 0; j < n2; j++)
-    {
-        Y[j] = vect[mid + 1 + j];
-    }
-
-  // Merge the arrays X and Y into vector
-  int i, j, k;
-  i = 0;
-  j = 0;
-  k = left;
-  while (i < n1 && j < n2) 
+  for(int i = vect.size(); i > 0; i /= 2)
   {
-    if (X[i].getPrice() <= Y[j].getPrice()) 
+    for(int k = i; k < vect.size(); k += 1)
     {
-      vect[k] = X[i];
-      i++;
-    } 
-    else 
-    {
-      vect[k] = Y[j];
-      j++;
-    }
-    k++;
-  }
- 
-  while (i < n1) 
-  {
-    vect[k++] = X[i++];
-  }
+      Wine temp = vect[k];
 
-  while (j < Y.size()) 
-  {
-    vect[k++] = Y[j++];
+      int j;
+      for(int j = k; j >= i && vect[j - i].getPrice() > temp.getPrice(); j -= k)
+      {
+        vect[j] = vect[j - i];
+      }
+      vect[j] = temp;
+    }
   }
 }
 
-void mergeSortPrice(vector<Wine>& vect, int left, int right) 
+void shellSortPoints(vector<Wine>& vect)
 {
-  if (left < right) 
+  for(int i = vect.size(); i > 0; i /= 2)
   {
-    // m is the point where the array is divided into two subarrays
-    int mid = left + (right - left) / 2;
+    for(int k = i; k < vect.size(); k += 1)
+    {
+      Wine temp = vect[k];
 
-    mergeSortPrice(vect, left, mid);
-    mergeSortPrice(vect, mid + 1, right);
-
-    // Merge the sorted subarrays
-    mergePrice(vect, left, mid, right);
+      int j;
+      for(int j = k; j >= i && vect[j - i].getPoints() > temp.getPoints(); j -= k)
+      {
+        vect[j] = vect[j - i];
+      }
+      vect[j] = temp;
+    }
   }
 }
-
-void mergePoints(vector<Wine>& vect, int left, int mid, int right) 
-{
-    int n1 = mid - left + 1;
-    int n2 = right - mid;
-    vector<Wine> X;
-    vector<Wine> Y;
-
-    for (int i = 0; i < n1; i++)
-    {
-        X[i] = vect[left + i];
-    }
-    for (int j = 0; j < n2; j++)
-    {
-        Y[j] = vect[mid + 1 + j];
-    }
-
-  // Merge the arrays X and Y into vector
-  int i, j, k;
-  i = 0;
-  j = 0;
-  k = left;
-  while (i < n1 && j < n2) 
-  {
-    if (X[i].getPoints() <= Y[j].getPoints()) 
-    {
-      vect[k] = X[i];
-      i++;
-    } 
-    else 
-    {
-      vect[k] = Y[j];
-      j++;
-    }
-    k++;
-  }
- 
-  while (i < n1) 
-  {
-    vect[k] = X[i];
-    i++;
-    k++;
-  }
-
-  while (j < n2) 
-  {
-    vect[k] = Y[j];
-    j++;
-    k++;
-  }
-}
-
-void mergeSortPoints(vector<Wine>& vect, int left, int right) 
-{
-  if (left < right) 
-  {
-    int mid = left + (right - left) / 2;
-
-    mergeSortPoints(vect, left, mid);
-    mergeSortPoints(vect, mid + 1, right);
-
-    // Merge the sorted subarrays
-    mergePoints(vect, left, mid, right);
-  }
-}
-
-
 
 
 //QUICK SORT, psuedocode cited from slides module 6
