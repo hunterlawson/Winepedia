@@ -56,7 +56,7 @@ int main() {
     //Search by data structure
     int dataStruct;
     
-    cout<< "Data Structure Options: " << endl;
+    cout<< "Sorting Algorithm Options: " << endl;
     cout<< "1. Bubble Sort"<< endl;
     cout<< "2. Merge Sort" << endl;
     cout<< "3. Quick Sort" << endl;
