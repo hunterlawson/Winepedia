@@ -55,19 +55,28 @@ int main() {
     getline(cin,searchItem);  
     
     //Search by data structure
-    int dataStruct;
+    int algo;
     
     cout<< "Sorting Algorithm Options: " << endl;
     cout<< "1. Bubble Sort"<< endl;
     cout<< "2. Merge Sort" << endl;
     cout<< "3. Quick Sort" << endl;
     cout<< "Enter menu option number: ";    
-    getline(cin,dataStruct);
+    getline(cin,algo);
       
     
     selectData(dataDir, colNum, searchItem, &searchResults);
     
      //Call sorting functions
+    if (algo == 1) { //bubble
+        bubbleSort(searchResults);
+    }
+    else if (algo == 2) { //merge
+        mergeSort(searchResults,0,searchResults.size()-1);
+    }
+    else if (algo == 3) { //quick
+        quickSort(searchResults,0,searchResults.size()-1);
+    }
     
     for(Wine w : searchResults) {
         w.display();
