@@ -75,7 +75,7 @@ int main() {
     int selection = stoi(selectionStr);
     
     selectData(dataDir, colNum, searchItem, &searchResults);
-    
+
      //Call sorting functions
     auto start = chrono::steady_clock::now();
     if (algo == 1)  { //bubble
@@ -98,11 +98,12 @@ int main() {
     }
     auto end = chrono::steady_clock::now();
     auto diff = end - start;
-    cout << chrono::duration <double, milli> (diff).count() << " ms" << endl;
-    
+
     for(Wine w : searchResults) {
         w.display();
     }
+
+    cout << chrono::duration <double, milli> (diff).count() << " ms" << endl;
     return 0;
 }
 
