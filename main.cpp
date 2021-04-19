@@ -26,7 +26,7 @@ int main() {
     vector<Wine> searchResults;
     searchResults.clear();
     
-   
+   //Menu display
     cout<< "--------Winepedia--------" << endl;
     cout<< "1. Search by country" << endl;
     cout<< "2. Search by province" << endl;
@@ -49,12 +49,25 @@ int main() {
     else if (colNum == 4)
         cout<< "Enter variety: ";
     else if (colNum == 5)
-        cout<< "Enter winery: ";
+        cout<< "Enter winery: ";   
+  
+    getline(cin,searchItem);  
     
-    getline(cin,searchItem);        
+    //Search by data structure
+    int dataStruct;
+    
+    cout<< "Data Structure Options: " << endl;
+    cout<< "1. Bubble Sort"<< endl;
+    cout<< "2. Merge Sort" << endl;
+    cout<< "3. Quick Sort" << endl;
+    cout<< "Enter menu option number: ";    
+    getline(cin,dataStruct);
       
-   
+    
     selectData(dataDir, colNum, searchItem, &searchResults);
+    
+     //Call sorting functions
+    
     for(Wine w : searchResults) {
         w.display();
     }
