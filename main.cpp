@@ -23,94 +23,95 @@ void selectData(const char* dir, int column, string match, vector<Wine>* contain
 int callback(void* container, int argc, char** argv, char** azColName);
 
 int main() {
-    const char* dataDir = "Data/wineData.db";
-    vector<Wine> searchResults;
-    searchResults.clear();
+    while(true) {
+        const char* dataDir = "Data/wineData.db";
+        vector<Wine> searchResults;
+        
+        //Menu display
+        cout<< "--------Winepedia--------" << endl;
+        cout<< "1. Search by country" << endl;
+        cout<< "2. Search by province" << endl;
+        cout<< "3. Search by title" << endl;
+        cout<< "4. Search by variety" << endl;
+        cout<< "5. Search by winery" << endl;
+        
+        string colNumStr;
+        cout<< "\nMenu Choice: ";
+        getline(cin,colNumStr);
+        int colNum = stoi(colNumStr);
+        
+        string searchItem;
+        
+    if (colNum == 1)
+        cout<< "\nEnter country: ";
+        else if (colNum == 2)
+            cout<< "\nEnter province: ";
+        else if (colNum == 3)
+            cout<< "\nEnter title: ";
+        else if (colNum == 4)
+            cout<< "\nEnter variety: ";
+        else if (colNum == 5)
+            cout<< "\nEnter winery: ";   
     
-   //Menu display
-    cout<< "--------Winepedia--------" << endl;
-    cout<< "1. Search by country" << endl;
-    cout<< "2. Search by province" << endl;
-    cout<< "3. Search by title" << endl;
-    cout<< "4. Search by variety" << endl;
-    cout<< "5. Search by winery" << endl;
-    
-    string colNumStr;
-    cout<< "\nMenu Choice: ";
-    getline(cin,colNumStr);
-    int colNum = stoi(colNumStr);
-    
-    string searchItem;
-    
-   if (colNum == 1)
-       cout<< "\nEnter country: ";
-    else if (colNum == 2)
-        cout<< "\nEnter province: ";
-    else if (colNum == 3)
-        cout<< "\nEnter title: ";
-    else if (colNum == 4)
-        cout<< "\nEnter variety: ";
-    else if (colNum == 5)
-        cout<< "\nEnter winery: ";   
-  
-    getline(cin,searchItem);  
-    
-    //Search by data structure
-    string algoStr;
-    
-    cout<< "\nSorting Algorithm Options: " << endl;
-    cout<< "1. Bubble Sort"<< endl;
-    cout<< "2. Heap Sort" << endl;
-    cout<< "3. Quick Sort" << endl;
-    cout<< "\nEnter menu option number: ";
-    getline(cin,algoStr);
-    int algo = stoi(algoStr);
-      
-    cout<< "\nSearch by: "<< endl;
-    cout<< "1. Points"<< endl;
-    cout<< "2. Price" << endl;
-    cout<< "\nEnter menu option number: ";
-    string selectionStr;
-    getline(cin,selectionStr);
-    int selection = stoi(selectionStr);
-    
-    selectData(dataDir, colNum, searchItem, &searchResults);
+        getline(cin,searchItem);  
+        
+        //Search by data structure
+        string algoStr;
+        
+        cout<< "\nSorting Algorithm Options: " << endl;
+        cout<< "1. Bubble Sort"<< endl;
+        cout<< "2. Heap Sort" << endl;
+        cout<< "3. Quick Sort" << endl;
+        cout<< "\nEnter menu option number: ";
+        getline(cin,algoStr);
+        int algo = stoi(algoStr);
+        
+        cout<< "\nSearch by: "<< endl;
+        cout<< "1. Points"<< endl;
+        cout<< "2. Price" << endl;
+        cout<< "\nEnter menu option number: ";
+        string selectionStr;
+        getline(cin,selectionStr);
+        int selection = stoi(selectionStr);
+        
+        selectData(dataDir, colNum, searchItem, &searchResults);
 
-     //Call sorting functions
-    auto start = chrono::steady_clock::now();
-    if (algo == 1)  { //bubble
-        if (selection == 1) //points
-            bubbleSortPoint(searchResults);            
-        else if (selection == 2)   //price          
-            bubbleSortPrice(searchResults);
-    }
-    else if (algo == 2) { //merge
-         if (selection == 1) //points
-            heapSortPoints(searchResults, searchResults.size());   
-        else if (selection == 2)   //price        
-            heapSortPrice(searchResults, searchResults.size());
-    }
-    else if (algo == 3) { //quick
-          if (selection == 1) //points
-            quickSortPoints(searchResults,0,searchResults.size()-1);
-        else if (selection == 2)   //price      
-            quickSortPrice(searchResults,0,searchResults.size()-1);
-    }
-    auto end = chrono::steady_clock::now();
-    auto diff = end - start;
+        //Call sorting functions
+        auto start = chrono::steady_clock::now();
+        if (algo == 1)  { //bubble
+            if (selection == 1) //points
+                bubbleSortPoint(searchResults);            
+            else if (selection == 2)   //price          
+                bubbleSortPrice(searchResults);
+        }
+        else if (algo == 2) { //merge
+            if (selection == 1) //points
+                heapSortPoints(searchResults, searchResults.size());   
+            else if (selection == 2)   //price        
+                heapSortPrice(searchResults, searchResults.size());
+        }
+        else if (algo == 3) { //quick
+            if (selection == 1) //points
+                quickSortPoints(searchResults,0,searchResults.size()-1);
+            else if (selection == 2)   //price      
+                quickSortPrice(searchResults,0,searchResults.size()-1);
+        }
+        auto end = chrono::steady_clock::now();
+        auto diff = end - start;
 
-    for(Wine w : searchResults) {
-        w.display();
-    }
+        for(Wine w : searchResults) {
+            w.display();
+        }
 
-    cout << chrono::duration <double, milli> (diff).count() << " ms" << endl;
+        cout << chrono::duration <double, milli> (diff).count() << " ms" << endl;
+    }
     return 0;
 }
 
 void selectData(const char* dir, int columnNum, string term, vector<Wine>* container) {
     sqlite3* database;
     sqlite3_open(dir, &database); // Open the database
-
+    container->clear();
     // Choose the correct name for the column depending on the choice for columnNum
     string columnName;
     switch(columnNum) {
